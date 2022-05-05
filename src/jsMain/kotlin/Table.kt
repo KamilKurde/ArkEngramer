@@ -2,7 +2,6 @@ import androidx.compose.runtime.Composable
 import org.jetbrains.compose.web.attributes.*
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.*
-import kotlin.math.min
 
 private val headers = listOf("Name", "Code", "Index", "EP Cost", "Required Level")
 
@@ -13,7 +12,7 @@ fun Table(data: List<Engram>) {
 		attr("data-show-columns", true.toString())
 		classes("table", "table-bordered", "table-hover")
 		style {
-			border(color = Color("#09E2DE"))
+			border(color = textColor)
 		}
 	})
 	{
@@ -22,7 +21,7 @@ fun Table(data: List<Engram>) {
 				position(Position.Sticky)
 				top(0.px)
 				style {
-					backgroundColor(Color("#f5f5f5"))
+					backgroundColor(backgroundColor)
 				}
 			}
 		}) {

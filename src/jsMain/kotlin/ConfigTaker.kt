@@ -4,7 +4,7 @@ import androidx.compose.runtime.*
 fun ConfigTaker()
 {
 	var value by remember { mutableStateOf("") }
-	textTaker(value, "Config", { value = it }){
+	textTaker("Config", { value = it }){
 		config = value
 	}
 }

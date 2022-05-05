@@ -1,10 +1,9 @@
 import androidx.compose.runtime.*
 
 @Composable
-fun WikiTaker()
-{
+fun WikiTaker() {
 	var value by remember { mutableStateOf("") }
-	textTaker(value, "Wiki", { value = it }){
+	textTaker("Wiki", { value = it }) {
 		wiki = value
 	}
 }
