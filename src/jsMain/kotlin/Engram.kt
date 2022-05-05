@@ -1,11 +1,14 @@
 data class Engram(val name: String?, val code: String, val index: Int?, var epCost: Int, var requiredLevel: Int) {
+
+	fun toConfig(): String {
+		return "OverrideNamedEngramEntries=(EngramClassName=\"$code\",EngramHidden=false,EngramPointsCost=$epCost,EngramLevelRequirement=$requiredLevel,RemoveEngramPreReq=true)"
+	}
 	companion object {
 		fun fromWiki(wikiRow: String): Engram {
 			val split = wikiRow.split("||").mapIndexed { index, it ->
 				val trimmed = it.trim()
 				if (index == 0) trimmed.removeSurrounding(" ") else trimmed.replace(" ", "")
 			}.filterNot { it.isEmpty() }
-			println("wiki: $wikiRow")
 			val name = split[0].removePrefix("| {{ItemLink|").removeSuffix("}}")
 			val code = split[1]
 			val index = split[2].toInt()
@@ -21,7 +24,6 @@ data class Engram(val name: String?, val code: String, val index: Int?, var epCo
 		}
 
 		fun fromConfig(configRow: String): Engram {
-			println("config: $configRow")
 			val split = configRow.trim().removePrefix("OverrideNamedEngramEntries=(").removeSuffix(")").split(",")
 			val code = split[0].removePrefix("EngramClassName=\"").removeSuffix("\"")
 			val epCost = split[2].removePrefix("EngramPointsCost=").toInt()

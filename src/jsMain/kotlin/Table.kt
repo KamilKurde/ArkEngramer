@@ -1,4 +1,4 @@
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import org.jetbrains.compose.web.attributes.*
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.*
@@ -7,6 +7,23 @@ private val headers = listOf("Name", "Code", "Index", "EP Cost", "Required Level
 
 @Composable
 fun Table(data: List<Engram>) {
+	var loading by remember { mutableStateOf(true) }
+	if (loading) {
+		Img("favicon.png")
+		{
+			style {
+				width(120.px)
+				height(120.px)
+				property("animation", "spin 2s linear infinite")
+				position(Position.Absolute)
+				left(50.percent)
+				right(50.percent)
+				top(50.percent)
+				bottom(50.percent)
+				property("transform", "translate(-50%,-50%)")
+			}
+		}
+	}
 	Table({
 		id("table")
 		attr("data-show-columns", true.toString())
@@ -76,6 +93,7 @@ fun Table(data: List<Engram>) {
 					}
 				}
 			}
+			loading = false
 		}
 	}
 }
