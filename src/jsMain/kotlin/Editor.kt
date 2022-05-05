@@ -1,7 +1,7 @@
 import androidx.compose.runtime.*
 import kotlinx.browser.window
 import org.jetbrains.compose.web.attributes.*
-import org.jetbrains.compose.web.css.backgroundColor
+import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.*
 
 @Composable
