@@ -13,17 +13,10 @@
 
         async function copyExported() {
             await sleep(500);
-            /* Get the text field */
             let exported = document.getElementById("exported");
-
-            /* Select the text field */
             exported.select();
-            exported.setSelectionRange(0, 99999); /* For mobile devices */
-
-            /* Copy the text inside the text field */
+            exported.setSelectionRange(0, 99999);
             await navigator.clipboard.writeText(exported.value);
-
-            /* Alert the copied text */
             alert("Copied the text, paste it back into the config");
         }
     </script>
