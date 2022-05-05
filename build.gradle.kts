@@ -129,8 +129,13 @@ abstract class Minify : DefaultTask() {
     }
 }
 
+tasks.register<Delete>("cleanDistributions")
+{
+    delete(projectDir.absolutePath + File.separator + "distributions")
+}
+
 tasks.register<Minify>("buildMinified") {
-    dependsOn("jsBrowserProductionWebpack")
+    dependsOn("cleanDistributions","jsBrowserProductionWebpack")
     inputDirectory = File(projectDir.absolutePath + File.separator + "build" + File.separator + "distributions")
     outputDirectory = File(projectDir.absolutePath + File.separator + "distributions")
 }
