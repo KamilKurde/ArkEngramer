@@ -2,6 +2,3 @@
 /.gradle/
 /.idea/
 !/build/
-
-/build/*
-!build/distributions/

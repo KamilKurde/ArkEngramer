@@ -116,11 +116,16 @@ abstract class Minify : DefaultTask() {
         require(inputDirectory?.isDirectory ?: false) { "Input directory is not a directory" }
         require(outputDirectory != null) { "Output directory is not specified" }
         require(outputDirectory?.isDirectory ?: false) { "Output directory is not a directory" }
-        val files = inputDirectory!!.listFiles()!!.filter { it.isFile && it.extension in listOf("js", "css") }
+        val allFiles = inputDirectory!!.listFiles()!!
+        val files = allFiles.filter { it.isFile && it.extension in listOf("js", "css") }
         val inputSize = files.sumOf { it.length() }
         val outputSize = files.sumOf { minify(it, outputDirectory!!) }
         val difference = (inputSize - outputSize).toFloat() / inputSize
         println("All files converted, input size: $inputSize, output size: $outputSize, size reduced by ${difference}%")
+        println("Copying remaining files")
+        for (file in allFiles.filter { it !in files }) {
+            file.copyTo(File(outputDirectory, file.name))
+        }
     }
 }
 
